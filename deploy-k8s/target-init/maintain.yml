@@ -1,0 +1,20 @@
+---
+# Defines deployment design and assigns role to server groups
+
+#- hosts: kode4 
+#  vars:
+#    ironic_provision_interface : eth0 
+#    provision_bridge_name: provision
+#  tasks:
+##   - service: name=firewalld state=stopped enabled=no
+#   #- service: name=rc-last state=started
+##   - script: /opt/overcloud-ops/prepare_deploy/roles/common/files/up_bridge_ip.sh provision eth0
+#    #- shell: echo {{ ansible_eth0.ipv4.address | default(ansible_provision.ipv4.address) }} > /tmp/nic.ip
+#    #- shell: echo {{ ansible_provision.ipv4.address }} or {{ ansible_eth0.ipv4.address}}  > /tmp/nic.ip
+#    - template: src=provision_ip.j2  dest=/root/provision.txt
+
+
+- hosts: all
+  tasks:
+    - command: umount /var/lib/docker/overlay
+    - command: rm -fr /var/lib/docker/*

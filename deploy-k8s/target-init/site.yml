@@ -1,0 +1,15 @@
+---
+# Defines deployment design and assigns role to server groups
+
+
+- hosts: all
+  gather_facts: false
+  become: True
+  roles:
+    - common
+
+#- hosts: node
+#  gather_facts: false
+#  become: True
+#  roles:
+#    - node

@@ -1,0 +1,11 @@
+[Unit]
+Description=Very last service
+After=default.target
+
+[Service]
+Type=forking
+ExecStart=/etc/rc.d/rc-last.sh
+TimeoutStartSec=0
+
+[Install]
+WantedBy=default.target

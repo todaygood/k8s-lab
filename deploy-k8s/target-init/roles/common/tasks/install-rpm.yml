@@ -1,0 +1,62 @@
+---
+
+- name: install rpm packages
+  yum: name={{item}} state=present
+  with_items: 
+    - lvm2
+    - lrzsz
+    - rsync
+    - ntp 
+    - chrony
+    - nfs-utils
+    - ipmitool
+    - gcc 
+    - wget
+    - curl
+    - tcpdump
+    - telnet
+    - net-tools
+    - python-pip
+    - python-devel
+    - bzip2
+    - vim 
+    - btrfs-progs
+    - btrfs-progs-devel
+    - ansible
+    - yum-utils
+    - bridge-utils
+    - deltarpm
+    - jq
+    - psmisc
+    - bind-utils
+    - python-docker-py
+    - xorg-x11-xauth
+    - dejavu-sans-fonts 
+    - dejavu-sans-mono-fonts  
+    - dejavu-serif-fonts
+    - python-docker-py
+    - python-wheel
+    
+- name: ensure some packages absent
+  yum: name={{ item }} state=absent
+  with_items:
+    - NetworkManager
+
+- name: install utils
+  copy: src={{ item}} dest=/usr/local/bin/ mode=0777
+  with_items:
+    - check_container_running.sh
+    - enter_container
+
+
+# ask host can access Internet
+- name: prepare python module package
+  copy: src={{ item }} dest=/tmp/kolla/
+  with_items:
+    - Jinja2-2.9.6-py2.py3-none-any.whl
+
+- name: install python modules
+  pip: name=/tmp/kolla/{{ item }} state=present
+  with_items:
+    - Jinja2-2.9.6-py2.py3-none-any.whl
+

@@ -1,0 +1,16 @@
+---
+
+- include: basic.yml
+
+- include: enable-defined-service.yml
+
+- include: set-repo.yml
+
+- include: install-rpm.yml
+
+- include: time-set.yml
+
+#- include: docker.yml
+
+- include: sys-setting.yml
+

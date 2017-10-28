@@ -1,0 +1,34 @@
+---
+
+- name: copy /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+  copy: src={{item}} dest=/etc/pki/rpm-gpg/
+  with_items: 
+    - RPM-GPG-KEY-EPEL-7  
+    - RPM-GPG-KEY-CentOS-SIG-Cloud 
+    - RPM-GPG-KEY-CentOS-SIG-Storage
+    - RPM-GPG-KEY-CentOS-SIG-Virtualization
+
+- name: rpm import key
+  script: import-key.sh
+
+- name: run yum clean all 
+  shell: yum clean all
+
+- name: remove all existed repo 
+  shell: rm -f /etc/yum.repos.d/*.repo
+
+
+- name: generate repo file
+  template: src={{ item }}.j2 dest=/etc/yum.repos.d/{{ item }}
+  with_items: 
+    - bgi-centos.repo 
+    - bgi-centos-beta.repo
+    - bgi-epel.repo 
+    - bgi-k8s.repo 
+  
+
+- name: refresh the repo
+  shell: yum repolist
+
+
+

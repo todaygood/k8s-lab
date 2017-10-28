@@ -1,0 +1,10 @@
+---
+
+- name: enable kdump manually parameter
+  sysctl:
+    name: kernel.sysrq
+    value: 1
+    reload: yes
+    state: present
+    
+

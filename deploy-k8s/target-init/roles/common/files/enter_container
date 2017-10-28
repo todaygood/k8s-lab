@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ $# -ne 1 ] 
+then 
+   echo "Usage:$0 container_name"
+   exit 1
+else
+	docker exec -it -u root $1 bash
+fi

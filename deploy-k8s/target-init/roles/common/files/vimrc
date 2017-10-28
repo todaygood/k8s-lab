@@ -1,0 +1,28 @@
+set fileencodings=utf-8,gb2312,gbk,gb18030
+set termencoding=utf-8
+set encoding=utf-8
+set fileencoding=utf-8 
+set paste
+
+set t_Co=256
+
+filetype on
+
+"语法高亮度显示 
+syntax on 
+syntax enable 
+colorscheme slate
+"
+""自动缩进 
+set autoindent
+
+"智能缩进 
+"set smartindent
+"
+""第一行设置tab键为4个空格，第二行设置当行之间交错时使用4个空格(方便写Python代码) 
+set tabstop=4 
+set shiftwidth=4
+
+"匹配括号 
+set showmatch
+"

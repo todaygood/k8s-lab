@@ -1,0 +1,19 @@
+- name: install service
+  copy: src={{ item }}   dest=/etc/systemd/system/
+  with_items:
+     - rc-last.service
+
+- name: systemd reload
+  command: systemctl daemon-reload
+
+- name: install sh
+  copy: src={{ item }}  dest=/etc/rc.d/  mode="a+x"
+  with_items:
+     - rc-last.sh
+
+- name: enable defined service
+  service: name={{ item }} enabled=yes
+  with_items:
+     - rc-last.service
+
+

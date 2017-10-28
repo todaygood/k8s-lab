@@ -1,0 +1,22 @@
+---
+
+- name: install pip and docker-py
+  yum: name={{item}} state=present
+  with_items:
+    - python2-pip
+    - python-docker-py
+
+- name: install docker-engine which is alias docker rpm name in docker upstream
+  yum: name={{item}} state=present
+  with_items:
+    - docker-engine-{{docker_version}}
+
+- name: docker service config file
+  template: src=docker.service.j2 dest=/usr/lib/systemd/system/docker.service
+
+- name: reload docker systemd service
+  command: systemctl daemon-reload
+
+- name: enable start docker service
+  service: name=docker  state=restarted enabled=yes
+

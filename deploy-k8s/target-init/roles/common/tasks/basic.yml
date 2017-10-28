@@ -1,0 +1,31 @@
+---
+
+- name: configure selinux 
+  selinux: policy=targeted state=disabled
+
+- name: config sshd config file
+  lineinfile: dest=/etc/ssh/sshd_config insertafter=UseDNS  line="UseDNS no" state=present
+
+- name: restart sshd service
+  service: name=sshd state=restarted
+
+- name: stop firewalld
+  service: name=firewalld state=stopped enabled=no
+
+- name: enable rc-local
+  file: path=/etc/rc.d/rc.local mode="a+x"
+
+- name: set vimrc
+  copy: src=vimrc  dest=/root/.vimrc  
+
+
+- name: copy ansible config
+  copy: src=ansible.cfg dest=/etc/ansible/
+
+- name: check ssh key file
+  stat: path=~/.ssh/id_rsa
+  register: ssh_key_res
+
+- name: generate ssh key
+  command: ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+  when: ssh_key_res.stat.exists == False

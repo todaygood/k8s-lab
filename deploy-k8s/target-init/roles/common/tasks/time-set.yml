@@ -1,0 +1,16 @@
+---
+
+- name: set timezone 
+  timezone:
+    name: Asia/Shanghai
+  ignore_errors: true
+
+- name: set ntp server
+  template: src=ntp.conf.j2 dest=/etc/ntp.conf
+
+- name: stop chronyd
+  service: name=chronyd state=stopped enabled=no
+
+- name: start ntpd
+  service: name=ntpd  state=restarted enabled=yes
+  ignore_errors: true
