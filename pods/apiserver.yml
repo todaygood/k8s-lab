@@ -1,0 +1,134 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubernetes.io/config.hash: 2b26f6a5c10dcfaaac99a352d80fc0ee
+    kubernetes.io/config.mirror: 2b26f6a5c10dcfaaac99a352d80fc0ee
+    kubernetes.io/config.seen: 2017-07-11T13:26:25.138527879Z
+    kubernetes.io/config.source: file
+  creationTimestamp: 2017-07-11T13:27:48Z
+  labels:
+    k8s-app: kube-apiserver
+    kubespray: v2
+  name: kube-apiserver-k8s0
+  namespace: kube-system
+  resourceVersion: "11229834"
+  selfLink: /api/v1/namespaces/kube-system/pods/kube-apiserver-k8s0
+  uid: bb0877d8-663c-11e7-bb5f-525400570e7e
+spec:
+  containers:
+  - command:
+    - /hyperkube
+    - apiserver
+    - --advertise-address=192.168.122.24
+    - --etcd-servers=https://192.168.122.24:2379,https://192.168.122.25:2379,https://192.168.122.26:2379
+    - --etcd-quorum-read=true
+    - --etcd-cafile=/etc/ssl/etcd/ssl/ca.pem
+    - --etcd-certfile=/etc/ssl/etcd/ssl/node-k8s0.pem
+    - --etcd-keyfile=/etc/ssl/etcd/ssl/node-k8s0-key.pem
+    - --insecure-bind-address=127.0.0.1
+    - --apiserver-count=2
+    - --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota
+    - --service-cluster-ip-range=10.233.0.0/18
+    - --service-node-port-range=30000-32767
+    - --client-ca-file=/etc/kubernetes/ssl/ca.pem
+    - --basic-auth-file=/etc/kubernetes/users/known_users.csv
+    - --tls-cert-file=/etc/kubernetes/ssl/apiserver.pem
+    - --tls-private-key-file=/etc/kubernetes/ssl/apiserver-key.pem
+    - --token-auth-file=/etc/kubernetes/tokens/known_tokens.csv
+    - --service-account-key-file=/etc/kubernetes/ssl/apiserver-key.pem
+    - --secure-port=6443
+    - --insecure-port=8080
+    - --storage-backend=etcd3
+    - --v=2
+    - --allow-privileged=true
+    - --anonymous-auth=False
+    image: quay.io/coreos/hyperkube:v1.6.4_coreos.0
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        host: 127.0.0.1
+        path: /healthz
+        port: 8080
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: kube-apiserver
+    resources:
+      limits:
+        cpu: 800m
+        memory: 2G
+      requests:
+        cpu: 100m
+        memory: 256M
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /etc/kubernetes
+      name: kubernetes-config
+      readOnly: true
+    - mountPath: /etc/ssl/certs
+      name: ssl-certs-host
+      readOnly: true
+    - mountPath: /etc/ssl/etcd/ssl
+      name: etcd-certs
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  hostNetwork: true
+  nodeName: k8s0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    operator: Exists
+  volumes:
+  - hostPath:
+      path: /etc/kubernetes
+    name: kubernetes-config
+  - hostPath:
+      path: /etc/ssl/certs/
+    name: ssl-certs-host
+  - hostPath:
+      path: /etc/ssl/etcd/ssl
+    name: etcd-certs
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: 2017-10-18T13:20:28Z
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: 2017-10-18T13:20:31Z
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: 2017-10-18T13:20:28Z
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://44bcff1f8f31515bc1ace5e512e84026c8b245002bb25d012b3c4276b89fc35a
+    image: quay.io/coreos/hyperkube:v1.6.4_coreos.0
+    imageID: docker-pullable://quay.io/coreos/hyperkube@sha256:297f45919160ea076831cd067833ad3b64c789fcb3491016822e6f867d16dcd5
+    lastState:
+      terminated:
+        containerID: docker://a5257462ed183a2608c1604ed6c2dc6449bcbc400792ff71b2bda68e4872ae49
+        exitCode: 2
+        finishedAt: 2017-10-18T13:02:09Z
+        reason: Error
+        startedAt: 2017-10-18T13:01:29Z
+    name: kube-apiserver
+    ready: true
+    restartCount: 197
+    state:
+      running:
+        startedAt: 2017-10-18T13:20:30Z
+  hostIP: 192.168.122.24
+  phase: Running
+  podIP: 192.168.122.24
+  qosClass: Burstable
+  startTime: 2017-10-18T13:20:28Z

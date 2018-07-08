@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubernetes.io/created-by: |
+      {"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"ReplicaSet","namespace":"default","name":"nginx-2371676037","uid":"98063a99-bb11-11e7-a390-52540064eee3","apiVersion":"extensions","resourceVersion":"12304052"}}
+  creationTimestamp: 2017-10-27T22:05:09Z
+  generateName: nginx-2371676037-
+  labels:
+    pod-template-hash: "2371676037"
+    run: nginx
+  name: nginx-2371676037-73tx4
+  namespace: default
+  ownerReferences:
+  - apiVersion: extensions/v1beta1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: nginx-2371676037
+    uid: 98063a99-bb11-11e7-a390-52540064eee3
+  resourceVersion: "12348672"
+  selfLink: /api/v1/namespaces/default/pods/nginx-2371676037-73tx4
+  uid: e5b8584c-bb62-11e7-a390-52540064eee3
+spec:
+  containers:
+  - image: nginx
+    imagePullPolicy: Always
+    name: nginx
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-x96cb
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  nodeName: k8s1
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  volumes:
+  - name: default-token-x96cb
+    secret:
+      defaultMode: 420
+      secretName: default-token-x96cb
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: 2017-10-27T22:05:09Z
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: 2017-10-28T06:13:59Z
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: 2017-10-27T22:05:09Z
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://fd4d8c825c5f85530b8633f04c978263eb8cc76ba8ceee6933abf94ca691c85f
+    image: nginx:latest
+    imageID: docker-pullable://nginx@sha256:7a60c25bdcfcf37c26d4418ea551ebc0803a4eab72c27c126e84a1f0bf242950
+    lastState: {}
+    name: nginx
+    ready: true
+    restartCount: 0
+    state:
+      running:
+        startedAt: 2017-10-28T06:13:59Z
+  hostIP: 192.168.122.25
+  phase: Running
+  podIP: 10.233.102.194
+  qosClass: BestEffort
+  startTime: 2017-10-27T22:05:09Z

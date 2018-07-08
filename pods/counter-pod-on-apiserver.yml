@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: 2017-10-29T01:18:45Z
+  name: counter
+  namespace: default
+  resourceVersion: "12464010"
+  selfLink: /api/v1/namespaces/default/pods/counter
+  uid: 1c249645-bc47-11e7-aa76-52540036bd27
+spec:
+  containers:
+  - args:
+    - /bin/sh
+    - -c
+    - 'i=0; while true; do echo "$i: $(date)"; i=$((i+1)); sleep 1; done'
+    image: busybox
+    imagePullPolicy: Always
+    name: count
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-x96cb
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  nodeName: k8s2
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  volumes:
+  - name: default-token-x96cb
+    secret:
+      defaultMode: 420
+      secretName: default-token-x96cb
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: 2017-10-29T01:18:45Z
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: 2017-10-29T01:18:52Z
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: 2017-10-29T01:18:45Z
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://8ce9ec95e885e97a830dc19bfa4d517567b06080b0ec4d3a61a16b2831444057
+    image: busybox:latest
+    imageID: docker-pullable://busybox@sha256:3e8fa85ddfef1af9ca85a5cfb714148956984e02f00bec3f7f49d3925a91e0e7
+    lastState: {}
+    name: count
+    ready: true
+    restartCount: 0
+    state:
+      running:
+        startedAt: 2017-10-29T01:18:52Z
+  hostIP: 192.168.122.26
+  phase: Running
+  podIP: 10.233.68.4
+  qosClass: BestEffort
+  startTime: 2017-10-29T01:18:45Z
