@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-host-path
+spec:
+  containers:
+    - image: nginx 
+      name: podc-with-host-path
+      volumeMounts:
+        - mountPath: /hostpath
+          name: vol-hostpath
+   volumes:
+     - name: vol-hostpath
+       hostPath: 
+         type: Directory
+         path: /sys
