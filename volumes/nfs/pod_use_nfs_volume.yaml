@@ -1,0 +1,23 @@
+kind: Pod
+apiVersion: v1 
+metadata: 
+  name: pod-use-nfs-volume
+spec:
+  containers:
+    - name: podc-use-nfs-volume
+      image: nginx 
+      volumeMounts:
+        - mountPath: "/var/www/html"
+          name: vol-nfs0003
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "600m"
+        limits:
+          memory: "128Mi"
+          cpu: "900m"
+  volumes:
+    - name: vol-nfs0003
+      persistentVolumeClaim: 
+        claimName: pvc-nfs0003
+
