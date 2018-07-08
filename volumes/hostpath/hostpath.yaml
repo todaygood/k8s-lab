@@ -9,8 +9,16 @@ spec:
       volumeMounts:
         - mountPath: /hostpath
           name: vol-hostpath
-   volumes:
-     - name: vol-hostpath
-       hostPath: 
-         type: Directory
-         path: /sys
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "10Mi"
+        limits:
+          cpu: "200m"
+          memory: "20Mi"
+
+  volumes:
+    - name: vol-hostpath
+      hostPath: 
+        #type: Directory
+        path: /sys
