@@ -2,6 +2,7 @@
 
 ## Step1
 
+kubespray
 
 ## Step2 
 
