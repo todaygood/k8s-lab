@@ -16,7 +16,7 @@
 ## Step1- 准备，在每一个node上运行
 
 1. disable selinux, swap off 
-2. install docker community version 
+2. install docker community version  17.03.2-ce
 3. add k8s.repo, yum install -y kubelet kubeadm kubectl 
    systemctl enable kubelet && systemctl start kubelet
    
@@ -163,6 +163,39 @@ NAME                      STATUS    ROLES     AGE       VERSION
 k8s-0.cloud.genomics.cn   Ready     <none>    26m       v1.11.2
 k8s-1.cloud.genomics.cn   Ready     master    44m       v1.11.2
 ```
+
+### 测试DNS
+
+测试dns 
+```bash
+[root@k8s-0 ~]# kubectl run curl --image=radial/busyboxplus:curl -i --tty
+If you don't see a command prompt, try pressing enter.
+[ root@curl-87b54756-gprn5:/ ]$ nslookup kubernetes
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      kubernetes
+Address 1: 10.96.0.1 kubernetes.default.svc.cluster.local
+[ root@curl-87b54756-gprn5:/ ]$ nslookup my-nginx
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      my-nginx
+Address 1: 10.106.115.252 my-nginx.default.svc.cluster.local
+```
+### modify config 
+如果要修改如api-server的配置， api server等是安装过程中用容器来做的k8s服务
+可以直接修改/etc/kubernetes/manifests目录下的文件
+```bash
+[root@k8s-1 manifests]# pwd
+/etc/kubernetes/manifests
+[root@k8s-1 manifests]# ls
+etcd.yaml  kube-apiserver.yaml  kube-controller-manager.yaml  kube-scheduler.yaml
+```
+
+参见 https://github.com/kubernetes/kubeadm/issues/106
+
+
 
 
 # Ref
