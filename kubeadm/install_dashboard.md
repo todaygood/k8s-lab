@@ -185,7 +185,7 @@ kube-dns               ClusterIP   10.96.0.10       <none>        53/UDP,53/TCP 
 kubernetes-dashboard   NodePort    10.110.142.129   <none>        443:30274/TCP   58m
 ```
 
-在浏览器中输入 https://<master-ip>:30274 即可弹出登录窗口。
+在浏览器中输入 https://<master-ip>:30274 即可弹出登录窗口，拷贝上面"token:"后面的一长串字符,点击Sign in 进入
 
 ![dashboard登录窗口](https://github.com/todaygood/k8s-lab/blob/master/kubeadm/dashboard-1.png)
 
