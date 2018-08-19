@@ -193,3 +193,15 @@ kubernetes-dashboard   NodePort    10.110.142.129   <none>        443:30274/TCP 
 ![dashboard界面](https://github.com/todaygood/k8s-lab/blob/master/kubeadm/dashboard-2.png)
 
 
+
+
+# 不使用NodePort时
+
+上面是修改service使用NodePort type , 如果不使用NodePort，则
+
+`kubectl proxy --address=0.0.0.0`
+
+Browse to http://<master-ip>:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy
+
+
+

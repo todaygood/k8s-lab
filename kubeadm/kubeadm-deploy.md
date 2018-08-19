@@ -206,4 +206,11 @@ https://kubernetes.io/docs/setup/independent/install-kubeadm/
 
 https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/
 
+https://www.do1618.com/archives/1164/kubeadm-centos-7-4-%E5%AE%89%E8%A3%85-kubernetes-1-9-1/
+
+各种问题参见
+
+https://tonybai.com/2016/12/30/install-kubernetes-on-ubuntu-with-kubeadm/
+
+https://juejin.im/post/5b45d4185188251ac062f27c
 
