@@ -187,9 +187,9 @@ kubernetes-dashboard   NodePort    10.110.142.129   <none>        443:30274/TCP 
 
 在浏览器中输入 https://<master-ip>:30274 即可弹出登录窗口。
 
-[dashboard登录窗口](https://github.com/todaygood/k8s-lab/blob/master/kubeadm/dashboard-1.png)
+![dashboard登录窗口](https://github.com/todaygood/k8s-lab/blob/master/kubeadm/dashboard-1.png)
 
 
-[dashboard界面](https://github.com/todaygood/k8s-lab/blob/master/kubeadm/dashboard-2.png)
+![dashboard界面](https://github.com/todaygood/k8s-lab/blob/master/kubeadm/dashboard-2.png)
 
 
