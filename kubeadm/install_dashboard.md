@@ -204,4 +204,5 @@ kubernetes-dashboard   NodePort    10.110.142.129   <none>        443:30274/TCP 
 Browse to http://<master-ip>:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy
 
 
-
+# Ref 
+https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/#deploying-the-dashboard-ui
