@@ -115,6 +115,9 @@ k8s-1.cloud.genomics.cn   Ready     master    9m        v1.11.2
 
 ## Step3- 加入node 
 
+
+在每一个待加入cluster的node上面运行kubeadm join 
+
 ```bash
 [root@k8s-0 ~]# kubeadm join 192.168.122.253:6443 --token py7af9.p3vdwsso4pxqh1j5 --discovery-token-ca-cert-hash sha256:ab75e7c27135505c1558b29ad2ab6383eeab96fcef7856a85ecdbcd6da38327d
 [preflight] running pre-flight checks
